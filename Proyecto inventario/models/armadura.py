@@ -2,18 +2,19 @@ from abstract.item_base import Item
 from interfaces.equipable import Equipable
 
 class Armadura(Item, Equipable):
-    def _init_(self, nombre, peso, defensa):
-        super()._init_(nombre, peso)
+    def __init__(self, nombre, peso, defensa):
+        super().__init__(nombre, peso)
         self._defensa = defensa
-        self._equipada = False
 
-    def usar(self):
-        print(f"La armadura {self._nombre} no se usa directamente")
+    @property
+    def defensa(self):
+        return self._defensa
 
-    def equipar(self):
-        self._equipada = True
-        print(f"{self._nombre} equipada")
+    def usar(self, objetivo):
+        print("La armadura no se usa directamente")
 
-    def desequipar(self):
-        self._equipada = False
-        print(f"{self._nombre} desequipada")
+    def equipar(self, jugador):
+        jugador.defensa += self._defensa
+
+    def desequipar(self, jugador):
+        jugador.defensa -= self._defensa

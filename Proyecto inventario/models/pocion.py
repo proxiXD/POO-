@@ -1,8 +1,10 @@
-Item = str
+from abstract.item_base import Item
+
 class Pocion(Item):
     def __init__(self, nombre, peso, curacion):
-        super()._init_(nombre, peso)
+        super().__init__(nombre, peso)
         self._curacion = curacion
 
-    def usar(self):
-        print(f"Recuperas {self._curacion} puntos de vida")
+    def usar(self, objetivo):
+        objetivo.curar(self._curacion)
+        print(f"{objetivo.nombre} recupera {self._curacion} HP")
